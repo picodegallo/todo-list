@@ -1,0 +1,19 @@
+<h1><%= @list.name %></h1>
+<h6><%= @list.created_at.strftime("Created at %m/%d/%Y")%> <%=@list.updated_at.strftime("Updated on %m/%d/%Y")%></h6>
+<td><a href="/list/<%=@list.id%>/edit">Edit</a></td>
+<td><%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<p>
+
+<fieldset>
+<form>
+	<h3>Items:</h3>
+	<% @list.items.each do |item| %>
+	<input type="checkbox" name="item[<%= item.name %>]" value="<%=item.completed%>"><%= item.name %><br/>
+	<% end %>
+	<br>
+    <td><a href="/list/<%=@list.id%>/item/new">Add New Item</a></td>
+</form>
+</fieldset>
+
+<p>
+<td><a href="/list">Home</a></td>

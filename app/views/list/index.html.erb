@@ -1,0 +1,26 @@
+<h1>My To-Do Lists:</h1>
+<p><a href="/list/new">New List</a></p>
+
+
+
+<% @list.each do |list| %>
+<fieldset>
+<h2><a href="/list/<%= list.id %>"><%= list.name %></a></h2>
+
+<h6><%= list.created_at.strftime("Created at %m/%d/%Y")%> <%=list.updated_at.strftime("Updated on %m/%d/%Y")%></h6>
+
+
+	<% list.items.each do |item| %>
+	<form>
+	<input type="checkbox" name="item[<%= item.name %>]" value="<%=item.completed%>"><%= item.name %><br/>
+	</form>
+	<% end %>
+	<br>
+	<td><a href="/list/<%=list.id%>/edit">Edit</a></td>
+    <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+</fieldset>
+<% end %>
+
+
+
